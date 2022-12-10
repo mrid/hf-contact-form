@@ -9,11 +9,12 @@ import {
 } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ContactFormComponent } from './components/contact-form/contact-form.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ContactFormComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
-  bootstrap: [AppComponent],
+  bootstrap: [AppComponent,ContactFormComponent],
 })
 export class AppModule {}

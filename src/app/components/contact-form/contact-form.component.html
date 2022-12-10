@@ -1,0 +1,40 @@
+<form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+
+    <div class="container">
+      <h1>How can we help?</h1>
+    </div>
+    <div class="formSections">
+        <label for="name" class="required">Name:</label>
+		<input type="text" class="form-control" [class.is-invalid] = "contactForm!.get('name')!.invalid && contactForm!.get('name')!.touched"  formControlName="name" />
+		<div *ngIf="(contactForm!.get('name')!.invalid && contactForm!.get('name')!.touched) || contactForm!.get('name')!.dirty">
+			<small *ngIf="contactForm!.get('name')!.errors?.['required']" class="text-danger">Name is required</small>
+		</div>
+    </div>
+    <div class="formSections">
+        <label for="email" class="required">Email:</label>
+        <input type="text" class="form-control"  [class.is-invalid] = "contactForm!.get('email')!.invalid && contactForm!.get('email')!.touched" formControlName="email" [email]="emailValidation" />
+        <div *ngIf="(contactForm!.get('email')!.invalid && contactForm!.get('email')!.touched) || contactForm!.get('email')!.dirty">
+        <small class="text-danger" *ngIf="contactForm!.get('email')!.errors?.['required']">Email address is required</small>
+        <small class="text-danger" *ngIf="contactForm!.get('email')!.errors?.['email']">Email address is invalid</small>
+        </div>
+    </div>
+    <div class="formSections">
+        <label for="phone" class="required">Phone:</label>
+        <input type="text" class="form-control" formControlName="phone" name="phone" required/>
+        <div *ngIf="(contactForm!.get('phone')!.invalid && contactForm!.get('phone')!.touched) || contactForm!.get('phone')!.dirty">
+                <small class="text-danger" *ngIf="contactForm!.get('phone')!.errors?.['required']">Phone Number is required</small>
+                <div *ngIf="contactForm!.get('phone')!.errors?.['pattern']">Please, Enter 10 digit Phone Number.</div>  
+        </div>  
+    </div>
+    <div class="formSections">
+        <label for="company" class="required">Company Name:</label>
+        <input type="text"  class="form-control" formControlName="company" name="company" required/>
+    </div>
+    <div class="formSections">
+        <label for="business" class="required">Type of Business:</label>
+        <input type="text"  class="form-control" formControlName="business" name="business" required/>
+    </div>
+</form>
+<button type="submit" class="submitButton" [disabled]="!contactForm.valid" (click)="onSubmit()">GET IN TOUCH</button>
+
+
