@@ -1,0 +1,78 @@
+<div class="toolbar" role="banner">
+  <span class="title-center">{{ title }}</span>
+</div>
+
+<div class="split-view-container">
+  <div class="left">
+    <ul>
+      <li>RELATIONSHIPS MEAN SOMETHING</li>
+    </ul>
+    <div class="familyText">
+      <span>Family-owned and</span>
+      <span> operated since 1923</span>
+    </div>
+    <div style="margin-left: 25px; margin-top: 12px">
+      <span>
+        We're local like you and always by your side. Thats why our people work
+        everyday to innovate and serve you the best possible solutions to run
+        your business
+      </span>
+    </div>
+
+    <router-outlet name="left"></router-outlet>
+  </div>
+  <div class="right">
+    <div style="margin-bottom: 20px; width: 50%">
+      <span class="rightText">How can we help?</span>
+    </div>
+    <form [formGroup]="contactForm" #formDir="ngForm">
+      <div [hidden]="formDir.submitted">
+        <div
+          class="cross-validation"
+          [class.cross-validation-error]="
+            contactForm.touched || contactForm.dirty
+          "
+        >
+          <table>
+            <tr>
+              <div class="form-group">
+                <td><label class="required">Name </label></td>
+                <td>
+                  <input
+                    type="text"
+                    id="name"
+                    class="form-control"
+                    maxlength="50"
+                    size="40"
+                    required
+                    minlength="4"
+                  />
+                  <div
+                    *ngIf="name!.invalid && (name!.dirty || name!.touched)"
+                    class="alert"
+                  >
+                    <div *ngIf="name!.errors?.['required']">
+                      Name is required.
+                    </div>
+                    <div *ngIf="name!.errors?.['minlength']">
+                      Name must be at least 4 characters long.
+                    </div>
+                  </div>
+                </td>
+              </div>
+            </tr>
+          </table>
+          <div style="margin-top: 20px; margin-left: 60px; text-align: center">
+            <button class="submitButton" (click)="submit()">
+              GET IN TOUCH
+            </button>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <!-- Right outlet -->
+    <router-outlet name="right"></router-outlet>
+  </div>
+</div>
+<router-outlet></router-outlet>
