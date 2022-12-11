@@ -12,6 +12,7 @@ export class ContactFormComponent implements OnInit{
   contactForm!: FormGroup;
   emailValidation: boolean = true;
   phoneValidation: boolean = true;
+  submitted: boolean = false;
   contactdetails = {
     name: '',
     email: '',
@@ -41,9 +42,6 @@ export class ContactFormComponent implements OnInit{
         Validators.minLength(50),
       ]),
       business: new FormControl(this.contactdetails.business, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.minLength(50),
       ]),
     });
   }
@@ -63,6 +61,13 @@ export class ContactFormComponent implements OnInit{
     return this.contactForm.get('business');
   }
   onSubmit(): void {
-    console.log('Submitted!');
+    this.submitted = true;
+
+    if (this.contactForm.valid) {
+      alert(
+        "Form Submitted succesfully!!!\n Check the values in browser console."
+      );
+      console.log(this.contactForm.value);
+    }
   }
 }
