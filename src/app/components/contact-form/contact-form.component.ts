@@ -10,8 +10,6 @@ export class ContactFormComponent implements OnInit{
  
 
   contactForm!: FormGroup;
-  emailValidation: boolean = true;
-  phoneValidation: boolean = true;
   submitted: boolean = false;
   contactdetails = {
     name: '',
@@ -28,8 +26,7 @@ export class ContactFormComponent implements OnInit{
       ]),
       email: new FormControl(this.contactdetails.email, [
         Validators.required,
-        Validators.minLength(3),
-        Validators.minLength(64),
+        Validators.email
       ]),
       phone: new FormControl(this.contactdetails.phone, [
         Validators.required,
@@ -37,12 +34,10 @@ export class ContactFormComponent implements OnInit{
         Validators.minLength(12),
       ]),
       company: new FormControl(this.contactdetails.company, [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.minLength(50),
+        Validators.required
       ]),
       business: new FormControl(this.contactdetails.business, [
-      ]),
+      Validators.required]),
     });
   }
   get name() {
@@ -60,14 +55,23 @@ export class ContactFormComponent implements OnInit{
   get business() {
     return this.contactForm.get('business');
   }
+  
   onSubmit(): void {
     this.submitted = true;
 
     if (this.contactForm.valid) {
+      
+      let alerttxt = this.name?.value+" Thank you for contacting us!\n Following are your details : \n"+
+      "Phone : "+this.phone?.value+"\n"+
+      "Email : "+this.email?.value+"\n"+
+      "Company : "+this.company?.value+"\n"+
+      "Business details : "+this.business?.value+"\n";
       alert(
-        "Form Submitted succesfully!!!\n Check the values in browser console."
+        alerttxt
       );
       console.log(this.contactForm.value);
+    }else{
+      alert("Please correct errors and retry");
     }
   }
 }

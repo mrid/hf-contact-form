@@ -16,7 +16,7 @@
                 <label for="email" class="required">Email:</label>
             </div>
             <div class="col-sm">
-                <input type="text" class="form-control"  [class.is-invalid] = "contactForm!.get('email')!.invalid && contactForm!.get('email')!.touched" formControlName="email" [email]="emailValidation" />
+                <input type="email" class="form-control"  [class.is-invalid] = "contactForm!.get('email')!.invalid && contactForm!.get('email')!.touched" formControlName="email"/>
                 <div class="col-sm" *ngIf="(contactForm!.get('email')!.invalid && contactForm!.get('email')!.touched) || contactForm!.get('email')!.dirty">
                     <small class="errTxt" *ngIf="contactForm!.get('email')!.errors?.['required']">Email address is required</small>
                     <small class="errTxt" *ngIf="contactForm!.get('email')!.errors?.['email']">Email address is invalid</small>
@@ -58,6 +58,6 @@
     </div>
 </form>
 
-<button type="submit" class="submitButton" [disabled]="!contactForm.valid" (click)="onSubmit()">GET IN TOUCH</button>
+<button type="submit" class="submitButton" (click)="onSubmit()">GET IN TOUCH</button>
 
 
